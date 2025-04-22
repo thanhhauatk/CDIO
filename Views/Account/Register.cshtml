@@ -1,0 +1,45 @@
+﻿@model CDIO.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<h2>Đăng ký tài khoản</h2>
+
+<form asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="Username" class="control-label">Tài khoản</label>
+        <input asp-for="Username" class="form-control" placeholder="Tên đăng nhập" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label">Email</label>
+        <input asp-for="Email" class="form-control" placeholder="Địa chỉ email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="control-label">Mật khẩu</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Mật khẩu" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmPassword" class="control-label">Nhập lại mật khẩu</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Nhập lại mật khẩu" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Đăng ký</button>
+    </div>
+
+    <div class="form-group">
+        <p>Đã có tài khoản? <a href="/Account/Login">Đăng nhập ngay</a></p>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

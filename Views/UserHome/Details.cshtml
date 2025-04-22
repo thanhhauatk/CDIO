@@ -1,0 +1,25 @@
+﻿@model CDIO.Models.Room
+@{
+    ViewData["Title"] = "Chi tiết phòng";
+}
+
+<div class="container mt-4">
+    <h2>Thông tin chi tiết phòng</h2>
+
+    <div class="card mt-3 shadow">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" class="card-img-top" alt="Ảnh phòng">
+        }
+
+        <div class="card-body">
+            <h4 class="card-title">@Model.RoomName</h4>
+            <p class="card-text"><strong>Loại phòng:</strong> @Model.RoomType</p>
+            <p class="card-text"><strong>Giá:</strong> @Model.Price?.ToString("N0") VNĐ / đêm</p>
+            <p class="card-text"><strong>Mô tả:</strong> @Model.Description</p>
+            <p class="card-text"><strong>Trạng thái:</strong> <span class="badge bg-info">@((RoomStatus)Model.Status)</span></p>
+        </div>
+    </div>
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">← Quay lại danh sách</a>
+</div>

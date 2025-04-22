@@ -1,0 +1,34 @@
+﻿@model List<CDIO.Models.Room>
+@{
+    ViewData["Title"] = "Danh sách phòng";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">🛏️ Danh sách phòng khách sạn</h2>
+
+    <div class="row">
+        @foreach (var room in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if (!string.IsNullOrEmpty(room.ImageUrl))
+                    {
+                        <img src="@room.ImageUrl" class="card-img-top" alt="Ảnh phòng">
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@room.RoomName</h5>
+                        <p class="card-text">
+                            <strong>Loại:</strong> @room.RoomType <br />
+                            <strong>Giá:</strong> @room.Price?.ToString("N0") VNĐ / đêm <br />
+                            <strong>Trạng thái:</strong>
+                            <span class="badge bg-secondary">@((RoomStatus)room.Status)</span>
+                        </p>
+
+                        <a asp-action="Details" asp-route-id="@room.Id" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

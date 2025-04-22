@@ -1,0 +1,48 @@
+﻿@model List<CDIO.Models.Room>
+@using CDIO.Models
+
+@{
+    ViewData["Title"] = "Danh sách phòng";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">🛏️ Danh sách phòng khách sạn</h2>
+
+    <div class="row">
+        @foreach (var room in Model)
+        {
+            // Lấy tên hiển thị trạng thái từ enum RoomStatus
+            var statusLabel = ((RoomStatus)room.Status).GetDisplayName();
+
+            // Xác định class CSS cho trạng thái
+            var badgeClass = room.Status switch
+            {
+                (int)RoomStatus.Trong => "bg-success",
+                (int)RoomStatus.DaDat => "bg-danger",
+                (int)RoomStatus.DangDon => "bg-warning text-dark",
+                (int)RoomStatus.BaoTri => "bg-secondary",
+                _ => "bg-dark"
+            };
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if (!string.IsNullOrEmpty(room.ImageUrl))
+                    {
+                        <img src="@room.ImageUrl" class="card-img-top" alt="Ảnh phòng">
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@room.RoomName</h5>
+                        <p class="card-text">
+                            <strong>Loại:</strong> @room.RoomType <br />
+                            <strong>Giá:</strong> @room.Price.ToString() VNĐ / đêm<br />
+                            <strong>Trạng thái:</strong>
+                            <span class="badge @badgeClass">@statusLabel</span>
+                        </p>
+                        <p>@room.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

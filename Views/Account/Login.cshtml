@@ -1,0 +1,41 @@
+﻿@model CDIO.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Đăng nhập</h2>
+
+<!-- Hiển thị thông báo lỗi nếu có -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="TenDangNhap"></label>
+        <input asp-for="TenDangNhap" class="form-control" placeholder="Tên đăng nhập" />
+        <span asp-validation-for="TenDangNhap" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MatKhau"></label>
+        <input asp-for="MatKhau" type="password" class="form-control" placeholder="Mật khẩu" />
+        <span asp-validation-for="MatKhau" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+
+    <div class="text-center mt-3">
+        <p>Chưa có tài khoản? <a href="/Account/Register">Đăng ký ngay</a></p>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
